@@ -20,14 +20,14 @@ x = 100
 y = 140
 x1 = 50
 y1 = 90
-delay = 50
-breakpoint = 25
-
+delay = 75
+breakpoint = 10
+isPressed = True 
 center = ((x + x1) / 2 , (y + y1) / 2)
 
 count = 0 #This can be a list as well per pixle
 
-default = 0.05 # this is the scale value 
+default = 0.00 # this is the scale value 
 scale = int()
 canvas = Canvas(root, height = canvas_height, width = canvas_width) #create the canvas 
 id1 = canvas.create_oval(x, y, x1, y1, tag = "Circle" , fill = "white", outline = "white")
@@ -61,30 +61,39 @@ while True :
     isActive = False
 
 
-    if invalue <= 1 : 
-        #canvas.itemconfig(id1, fill = "white") 
+    if invalue <= 1 and isPressed == False : 
+        canvas.delete(id1)
+        canvas.pack()
+        canvas.update()
+        id1 = canvas.create_oval(x, y, x1, y1, tag = "Circle" , fill = "white", outline = "white")
         scale = 0.00
         default = 0.00
         isActive = False 
 
-   # elif invalue     
-
-    elif invalue > 5 : 
+    elif invalue > 1 and invalue < 2 : 
         scale = 0.01
-        isActive = True
-    elif invalue > 25 :
-        scale = 0.025  
-        isActive = True
-    elif invalue > 125 :
-        scale = .05     
-        isActive = True 
+        isActive = True  
+         
 
+    elif invalue >= 2 and invalue <= 25 :
+        canvas.itemconfig(id1, fill = "red")
+        isActive = False 
+        isPressed = True
+    
+    elif invalue > 25 and invalue < 35 :
+        scale = 0.01  
+        isActive = True
+        
+
+    elif invalue > 35 and invalue < 200 :
+        canvas.itemconfig(id1, fill = "red")   
+        isActive = False 
+        isPressed = True
     
    
     default += scale 
-    
+    scale = 0.00
     default /= 2
-
     default += 1
 
 
@@ -92,8 +101,10 @@ while True :
    
      
     if isActive :
-        canvas.scale("Circle", center[0] , center[1], default  , default )
         canvas.itemconfig(id1, fill = "red")
+        canvas.scale("Circle", center[0] , center[1], default  , default )
+        default = 0.00
+        scale = 0.00
 
     canvas.after(delay)
     canvas.update()
@@ -102,16 +113,19 @@ while True :
 
     
 
-    count += 1 
-
-    if count % breakpoint == 0 :
-         canvas.delete(id1)
-         canvas.pack()
-         canvas.update()
-         id1 = canvas.create_oval(x, y, x1, y1, tag = "Circle" , fill = "white", outline = "white")
-         canvas.after(delay)
-         scale = 0.00
-         default = 0.01
+    if invalue == 0 :
+        count += 1 
+        if count == breakpoint : 
+            isPressed = False
+            count = 0
+    # if count % breakpoint == 0 :
+         # canvas.delete(id1)
+         # canvas.pack()
+         # canvas.update()
+         # id1 = canvas.create_oval(x, y, x1, y1, tag = "Circle" , fill = "white", outline = "white")
+    #      canvas.after(delay)
+    #      scale = 0.00
+    #      default = 0.01
 
 
 
