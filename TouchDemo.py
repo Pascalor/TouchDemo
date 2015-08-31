@@ -20,8 +20,8 @@ x = 100
 y = 140
 x1 = 50
 y1 = 90
-delay = 75
-breakpoint = 10
+delay = 50
+breakpoint = 15
 isPressed = True 
 center = ((x + x1) / 2 , (y + y1) / 2)
 
@@ -71,7 +71,7 @@ while True :
         isActive = False 
 
     elif invalue > 1 and invalue < 2 : 
-        scale = 0.01
+        scale = 0.1
         isActive = True  
          
 
@@ -81,7 +81,7 @@ while True :
         isPressed = True
     
     elif invalue > 25 and invalue < 35 :
-        scale = 0.01  
+        scale = 0.1  
         isActive = True
         
 
