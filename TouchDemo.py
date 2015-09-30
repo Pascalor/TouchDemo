@@ -21,7 +21,7 @@ y = 140
 x1 = 50
 y1 = 90
 delay = 25
-breakpoint = 7
+breakpoint = 25
 isPressed = True 
 center = ((x + x1) / 2 , (y + y1) / 2)
 
@@ -52,14 +52,17 @@ while True :
     except IndexError:
         continue    
     
-    print(value)
+    print(invalue)
 
     #set some boundaries
     isActive = False
      
 
+    touchbound = 30 #this will be the touch boundary 
 
-    if invalue <= 1 and isPressed == False : 
+
+
+    if invalue <= touchbound and isPressed == False : 
         canvas.delete(id1)
         canvas.pack()
         canvas.update()
@@ -68,21 +71,21 @@ while True :
         default = 0.00
         isActive = False 
 
-    elif invalue > 1 and invalue < 25 : 
+    elif invalue > touchbound  and invalue < touchbound + 5 : 
         scale = 0.1
         isActive = True  
    
-    elif invalue >= 2 and invalue <= 25 :
+    elif invalue >= touchbound + 5 and invalue <= touchbound + 10 :
         canvas.itemconfig(id1, fill = "red")
         isActive = True 
         isPressed = True
         #needs to switch invalue in here 
         
-    elif invalue > 25 and invalue < 35 :
+    elif invalue > touchbound + 10 and invalue < touchbound + 20 :
         scale = 0.1
         isActive = True
 
-    elif invalue > 35 and invalue < 200 :
+    elif invalue > touchbound + 20 and invalue < 100 :
         canvas.itemconfig(id1, fill = "red")   
         isActive = True 
         isPressed = True
@@ -110,7 +113,7 @@ while True :
 
     
 
-    if invalue == 0 or invalue == 1 :
+    if invalue < 10 :
         count += 1 
         if count == breakpoint : 
             isPressed = False
