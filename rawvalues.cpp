@@ -38,10 +38,16 @@ void loop()
       
           Serial.print(reading);
           Serial.print(" ");
+          Serial.print(count);
          // Serial.print((currentMux + 1) * (currentOutput + 1));
           Serial.print("\n");
-          
+          count++;
+          if(count == 30)
+          {
+            count = 0;
+            break;
           }
+        }
 
    }
     delay(DELAY + 10);

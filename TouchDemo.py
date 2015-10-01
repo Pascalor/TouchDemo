@@ -52,7 +52,7 @@ while True :
     except IndexError:
         continue    
     
-    print(invalue)
+    print(value)
 
     #set some boundaries
     isActive = False
