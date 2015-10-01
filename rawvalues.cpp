@@ -100,7 +100,8 @@ void CSNOT_LOW()                            //CSNOT set to LOW
 void CLOCK_LOW()                           //CLOCK set to LOW
 {
   digitalWrite(CLOCK, LOW);
-  delayMicroseconds(1);
+  delayMicroseconds(1);ls
+  
 }
 
 void CLOCK_HIGH()                         //CLOCK set to HIGH
