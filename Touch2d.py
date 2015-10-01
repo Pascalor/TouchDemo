@@ -26,7 +26,6 @@ class Touch2D:
         x2 = side 
         y2 = side 
 
-
         for element in range(self.pixel_count):
 
             #check to see for row boundary 
@@ -39,33 +38,16 @@ class Touch2D:
                 #column += side #next column
 
             id1 = self.canvas.create_rectangle(x, y, x2, y2, fill = "white", outline = "black") #create the pixel
-            canvas.update()
-            canvas.grid()
+            self.canvas.update()
+            self.canvas.grid()
             self.pixels.append(id1) #add to the pixel list 
             y2 += side
             y += side #move to the next row
             
-            
-
-if __name__ == '__main__':
-    #create the root 
-    root = Tk()
-    root.wm_title("Touch2D")
-
-    #create the canvas 
-    canvas_width = 500
-    canvas_height = 600  
+    def color(self, number , color):
+       self.canvas.itemconfig(self.pixels[number], fill = color) 
 
 
-    canvas = Canvas(root, width = canvas_width, height = canvas_height)
-
-    #create the grid 
 
     
-    grid = Touch2D(canvas,canvas_width,canvas_width, 6, 5)
-    grid.draw()
-
-    
-    #start the loop
-    root.mainloop()
 
