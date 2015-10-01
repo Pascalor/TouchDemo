@@ -25,9 +25,10 @@ class Baseline :
 				value = self.ser.readline().split()
 				try:
 					found = int(value[1])
+					pressure = int(value[0])
 				except IndexError:
 					pass	
-				pressure = int(value[0])
+				
 				if found == self.target:
 					break
 
@@ -45,29 +46,18 @@ class Baseline :
 				value = self.ser.readline().split()
 				try:
 					found = int(value[1])
+					pressure = int(value[0])
 				except IndexError:
 					pass	
-				pressure = int(value[0])
+				
 				if found == self.target:
 					break
 		return  pressure - self.basevalue
 
-if __name__ == '__main__':
-	baseline = Baseline(target = 1, size = 2)
-	baseline.setbasevalue()
-	while True:
-		print(baseline.value())
-	# ser = serial.Serial("/dev/tty.usbmodem0E20E711", 9600)
-	
-	# found = int()
-	# pressure = int(0)
-	# target = 2
+# if __name__ == '__main__':
+# 	baseline = Baseline(target = 29, size = 32)
+# 	baseline.setbasevalue()
+# 	while True:
+# 		print(baseline.value())
 
-	# while found != target:
-	#  	value = ser.readline().split()
-	# 	found = int(value[1])
-	# 	pressure = int(value[0])
-	# 	if found == target:
-	# 		print(value)
-	# 		break
 	
