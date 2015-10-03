@@ -8,25 +8,19 @@ from thread import start_new_thread
 from Baseline import Baseline
 #define a method that will create a thread for each pixel
 
-def fill_pixel(canvas, grid, number):
+def fill_pixel(canvas, grid, difference, number):
 
     color = ["#F5F5F5","#DCDCDC","#D3D3D3","#C0C0C0","#A9A9A9","#808080","#696969","#000000"]
-    reading = Baseline(target = number, size = 5)
-    reading.setbasevalue()
-    while True:   
-        difference = reading.value()
-       # print(difference)
-        if difference < -100:
-            reading.setbasevalue()
-        display = ""
-        if difference <= 0:
-            display = "white"
-        if difference > 10 :
-            display = "black"   
-        grid.color(number = number, color = display)
-        canvas.update()
+       
+    display = ""
+    if difference <= 20:
+        display = "white"
+    if difference > 20 :
+        display = "black"   
+    grid.color(number = number, color = display)
+    canvas.update()
         #sleep(1)
-    print("Hello")
+
 
 def main():
 	#create the root 
@@ -51,15 +45,28 @@ def main():
     grid.draw()
     
 
-    thread = Thread(target = fill_pixel, args=(canvas , grid , 1)) 
-    thread.daemon = True
-    thread.start()
+    # thread = Thread(target = fill_pixel, args=(canvas , grid , 1)) 
+    # thread.daemon = True
+    # thread.start()
     
 
-    thread2 = Thread(target = fill_pixel, args=(canvas , grid , 5)) 
-    thread2.daemon = True
-    thread2.start()
+    # thread2 = Thread(target = fill_pixel, args=(canvas , grid , 5)) 
+    # thread2.daemon = True
+    # thread2.start()
+    count = 0
+    while True:
+        #for drawings in range(pixelnumber):
+        reading = Baseline(target = count, size = 1)
+        reading.setbasevalue()
+        for drawings in range(3):    
+            difference = reading.value()
+            print(difference)
+            fill_pixel(canvas = canvas, grid = grid, difference = difference, number = count)
+        
 
+        count += 1
+        if count > 29 :
+            count = 0
 
 
     canvas.update()  
