@@ -13,14 +13,42 @@ def fill_pixel(canvas, grid, difference, number):
     color = ["#F5F5F5","#DCDCDC","#D3D3D3","#C0C0C0","#A9A9A9","#808080","#696969","#000000"]
        
     display = ""
-    if difference <= 20:
-        display = "white"
-    if difference > 20 :
-        display = "black"   
+    bound = 300
+    if difference <= bound:
+        display = color[0]
+    
+    if difference >= bound  :
+        display = color[3]
+    if difference >= bound + 50 and difference <= bound + 100 :
+        display = color[7]    
+    
+
     grid.color(number = number, color = display)
     canvas.update()
         #sleep(1)
 
+def grabdata(pixelnumber, canvas, grid):
+    pixellist = []
+    baselist = []
+    for items in range(pixelnumber):
+         pixellist.append(Baseline(target = items, size = 6))
+         baselist.append(pixellist[items].setbasevalue())
+
+    print("Baselist ", baselist)
+    while True:
+        for count in range(pixelnumber):
+            difference = pixellist[count].value()  - baselist[count]
+            print(difference)
+            fill_pixel(canvas = canvas, grid = grid, difference = difference, number = count)
+         
+
+
+def createbaseline(pixelnumber):
+    pixellist = []
+    for items in range(pixelnumber):
+         pixellist.append(Baseline(target = items, size = 1))
+         pixellist[items].setbasevalue()
+    return pixellist     
 
 def main():
 	#create the root 
@@ -45,31 +73,12 @@ def main():
     grid.draw()
     
 
-    # thread = Thread(target = fill_pixel, args=(canvas , grid , 1)) 
-    # thread.daemon = True
-    # thread.start()
+    thread = Thread(target = grabdata, args=(pixelnumber,canvas,grid)) 
+    thread.daemon = True
+    thread.start()
     
 
-    # thread2 = Thread(target = fill_pixel, args=(canvas , grid , 5)) 
-    # thread2.daemon = True
-    # thread2.start()
-    count = 0
-    while True:
-        #for drawings in range(pixelnumber):
-        reading = Baseline(target = count, size = 1)
-        reading.setbasevalue()
-        for drawings in range(3):    
-            difference = reading.value()
-            print(difference)
-            fill_pixel(canvas = canvas, grid = grid, difference = difference, number = count)
-        
-
-        count += 1
-        if count > 29 :
-            count = 0
-
-
-    canvas.update()  
+    # canvas.update()  
 
 
     	
