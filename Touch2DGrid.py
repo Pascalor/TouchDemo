@@ -16,10 +16,11 @@ def fill_pixel(canvas, grid, difference, number):
     bound = 300
     if difference <= bound:
         display = color[0]
-    
+    if difference >= bound + 25 and difference <= bound + 50:
+        display = color[2]
     if difference >= bound  :
         display = color[3]
-    if difference >= bound + 50 and difference <= bound + 100 :
+    if difference >= bound + 50 and difference <= bound + 100:
         display = color[7]    
     
 
