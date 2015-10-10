@@ -13,7 +13,7 @@ def fill_pixel(canvas, grid, difference, number):
     color = ["#F5F5F5","#DCDCDC","#D3D3D3","#C0C0C0","#A9A9A9","#808080","#696969","#000000"]
        
     display = ""
-    bound = 300
+    bound = 225
     if difference <= bound:
         display = color[0]
     if difference >= bound + 25 and difference <= bound + 50:
@@ -32,15 +32,15 @@ def grabdata(pixelnumber, canvas, grid):
     pixellist = []
     baselist = []
     for items in range(pixelnumber):
-         pixellist.append(Baseline(target = items, size = 6))
+         pixellist.append(Baseline(target = items, size = 1))
          baselist.append(pixellist[items].setbasevalue())
 
-    print("Baselist ", baselist)
+    print("Baselist ", baselist) # the baseline values 
     while True:
         for count in range(pixelnumber):
             difference = pixellist[count].value()  - baselist[count]
             print(difference)
-            fill_pixel(canvas = canvas, grid = grid, difference = difference, number = count)
+            fill_pixel(canvas = canvas, grid = grid, difference = difference, number = 1)
          
 
 
@@ -57,12 +57,12 @@ def main():
     root.wm_title("Touch2D")
 
     #create the canvas 
-    canvas_width = 500
+    canvas_width =  500
     canvas_height = 600  
 
     #pixel number
     pixel_height = 6
-    pixel_width = 5
+    pixel_width =  5
     pixelnumber = pixel_width * pixel_height
 
     canvas = Canvas(root, width = canvas_width, height = canvas_height)

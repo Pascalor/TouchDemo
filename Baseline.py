@@ -24,7 +24,7 @@ class Baseline :
 			 found = int(value[1])
 			 pressure = int(value[0])
 			except :
-			 	pass	
+			 	print("Reading")	
 
 			if found == self.target:
 			 reading.append(pressure)
