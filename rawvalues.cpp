@@ -3,7 +3,7 @@
 const int CLOCK = PB_2;                        //the Mux clock which is manually ticked in this program
 const int CS_NOT = PE_0;                      //controls whether or not the output gate can be altered
 const int DIN = PF_0;                              //the pin through which the control array is sent
-const int NUM_MUXES = 8;                   //the number of daisy-chained Muxes (not really 8) but 32 pins
+const int NUM_MUXES = 4;                   //the number of daisy-chained Muxes
 const int DELAY = 500;
 
 
@@ -76,7 +76,7 @@ int* setOutput(int mux, int input)           //Function that prepares array that
   
  
    int selectArray[4*NUM_MUXES];
-   int adjustedMux = 4 * mux;                //index of bit that is serves as the enabler for the chosen mux (indeces 0, 4, 8, or 12)
+   int adjustedMux = 4 * mux;                //index of bit that is serves as the enabler for the chosen mux (indeces 0, 4, 8, 12, 16, 20, 24)
          
    for(int i = 0; i < (NUM_MUXES*4); i++)    //initialize the array with LOW
    {
