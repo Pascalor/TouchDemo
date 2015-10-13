@@ -3,8 +3,8 @@
 const int CLOCK = PB_2;                        //the Mux clock which is manually ticked in this program
 const int CS_NOT = PE_0;                      //controls whether or not the output gate can be altered
 const int DIN = PF_0;                              //the pin through which the control array is sent
-const int NUM_MUXES = 4;                   //the number of daisy-chained Muxes
-const int DELAY = 250;
+const int NUM_MUXES = 8;                   //the number of daisy-chained Muxes (not really 8) but 32 pins
+const int DELAY = 500;
 
 
 void setup()
@@ -75,21 +75,21 @@ int* setOutput(int mux, int input)           //Function that prepares array that
 {
   
  
-   int selectArray[4*NUM_MUXES]; 
+   int selectArray[4*NUM_MUXES];
    int adjustedMux = 4 * mux;                //index of bit that is serves as the enabler for the chosen mux (indeces 0, 4, 8, or 12)
          
-   for(int i =0; i < (NUM_MUXES*4); i++)    //initialize the array with LOW 
+   for(int i = 0; i < (NUM_MUXES*4); i++)    //initialize the array with LOW
    {
      selectArray[i] = LOW;
    }
      
    selectArray[adjustedMux] = HIGH;          //turn the enabling pin to HIGH
    
-   selectArray[adjustedMux + 3] = input%2;  //calculate the binary for the pin 
+   selectArray[adjustedMux + 1] = input%2;  //calculate the binary for the pin backwards
    input/=2;
-   selectArray[adjustedMux + 2] = input%2;  
+   selectArray[adjustedMux + 2] = input%2;
    input/=2;
-   selectArray[adjustedMux + 1] = input%2;
+   selectArray[adjustedMux + 3] = input%2;
    return selectArray;
 }
 
@@ -106,7 +106,7 @@ void CSNOT_LOW()                            //CSNOT set to LOW
 void CLOCK_LOW()                           //CLOCK set to LOW
 {
   digitalWrite(CLOCK, LOW);
-  delayMicroseconds(1);ls
+  delayMicroseconds(1);
   
 }
 
