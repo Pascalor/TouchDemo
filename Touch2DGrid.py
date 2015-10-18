@@ -40,7 +40,7 @@ def grabdata(pixelnumber, canvas, grid):
         for count in range(pixelnumber):
             difference = pixellist[count].value()  - baselist[count]
             print(difference)
-            fill_pixel(canvas = canvas, grid = grid, difference = difference, number = 1)
+            fill_pixel(canvas = canvas, grid = grid, difference = difference, number = count)
          
 
 

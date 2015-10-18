@@ -59,11 +59,11 @@ void selectOutput(int* selectArray)                            //Function that s
 {
   CSNOT_HIGH();                                //CSNOT set to HIGH
   CLOCK_HIGH();                                //CLOCK set to HIGH
-  
+    
   for(int i = 0; i < (4*NUM_MUXES); i++)
   {
     CLOCK_LOW();                              //ClOCK set to LOW
-    digitalWrite(DIN, selectArray[i]);        //Bits set in  
+    digitalWrite(DIN, selectArray[i]);
     CLOCK_HIGH();                             //CLOCK is set to HIGH as MUX reads bits
   }
   
@@ -76,17 +76,17 @@ int* setOutput(int mux, int input)           //Function that prepares array that
   
  
    int selectArray[4*NUM_MUXES];
-   int adjustedMux = 4 * mux;                //index of bit that is serves as the enabler for the chosen mux (indeces 0, 4, 8, 12, 16, 20, 24)
+   int adjustedMux = 4 * mux;                //index of bit that is serves as the enabler for the chosen mux (indeces 0, 4, 8, 12)
          
    for(int i = 0; i < (NUM_MUXES*4); i++)    //initialize the array with LOW
    {
      selectArray[i] = LOW;
    }
      
-   selectArray[adjustedMux] = HIGH;          //turn the enabling pin to HIGH
+   selectArray[adjustedMux] = HIGH;          //turn the enabling pin to HIGH bit that accesses multiplexer
    
-   selectArray[adjustedMux + 1] = input%2;  //calculate the binary for the pin backwards
-   input/=2;
+   selectArray[adjustedMux + 1] = input%2;  //calculate the binary for the pin backwards due to documentation
+   input/=2;                                //3 bits needed to determine pin number 0-7
    selectArray[adjustedMux + 2] = input%2;
    input/=2;
    selectArray[adjustedMux + 3] = input%2;
