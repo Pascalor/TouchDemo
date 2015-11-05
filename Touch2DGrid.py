@@ -8,12 +8,19 @@ from thread import start_new_thread
 from Baseline import Baseline
 #define a method that will create a thread for each pixel
 
+
+
+
+
 def fill_pixel(canvas, grid, difference, number):
 
     color = ["#F5F5F5","#DCDCDC","#D3D3D3","#C0C0C0","#A9A9A9","#808080","#696969","#000000"]
        
     display = ""
-    bound = 225
+    #try and dynammically change the bound
+
+
+    bound = 100
     if difference <= bound:
         display = color[0]
     if difference >= bound + 25 and difference <= bound + 50:
@@ -44,12 +51,12 @@ def grabdata(pixelnumber, canvas, grid):
          
 
 
-def createbaseline(pixelnumber):
-    pixellist = []
-    for items in range(pixelnumber):
-         pixellist.append(Baseline(target = items, size = 1))
-         pixellist[items].setbasevalue()
-    return pixellist     
+# def createbaseline(pixelnumber):
+#     pixellist = []
+#     for items in range(pixelnumber):
+#          pixellist.append(Baseline(target = items, size = 1))
+#          pixellist[items].setbasevalue()
+#     return pixellist     
 
 def main():
 	#create the root 
@@ -77,6 +84,8 @@ def main():
     thread = Thread(target = grabdata, args=(pixelnumber,canvas,grid)) 
     thread.daemon = True
     thread.start()
+
+
     
 
     # canvas.update()  
