@@ -19,15 +19,18 @@ def fill_pixel(canvas, grid, difference, number):
     display = ""
     #try and dynammically change the bound
 
-
     bound = 100
     if difference <= bound:
         display = color[0]
-    if difference >= bound + 25 and difference <= bound + 50:
-        display = color[2]
-    if difference >= bound  :
+    if difference >= bound and difference <= bound + 125:
         display = color[3]
-    if difference >= bound + 50 and difference <= bound + 100:
+        print("Color 3")
+    if difference >= bound + 125 :
+        display = color[4]
+        print("color 4")
+    if difference >= bound+ 125 and difference <= bound + 225:
+        display = color[6]    
+    if difference >= bound + 225:
         display = color[7]    
     
 
@@ -46,30 +49,27 @@ def grabdata(pixelnumber, canvas, grid):
     while True:
         for count in range(pixelnumber):
             difference = pixellist[count].value()  - baselist[count]
-            print(difference)
+            #print(difference)
             fill_pixel(canvas = canvas, grid = grid, difference = difference, number = count)
          
 
 
-# def createbaseline(pixelnumber):
-#     pixellist = []
-#     for items in range(pixelnumber):
-#          pixellist.append(Baseline(target = items, size = 1))
-#          pixellist[items].setbasevalue()
-#     return pixellist     
+    
 
 def main():
 	#create the root 
     root = Tk()
-    root.wm_title("Touch2D")
+    root.wm_title("PressureDemo")
 
     #create the canvas 
     canvas_width =  500
     canvas_height = 600  
 
     #pixel number
-    pixel_height = 6
     pixel_width =  5
+    pixel_height = 6
+    
+
     pixelnumber = pixel_width * pixel_height
 
     canvas = Canvas(root, width = canvas_width, height = canvas_height)
@@ -79,6 +79,10 @@ def main():
     
     grid = Touch2D(canvas,canvas_width,canvas_width, pixel_height, pixel_width)
     grid.draw()
+
+    #grid.color(number = 6, color = "black")
+
+
     
 
     thread = Thread(target = grabdata, args=(pixelnumber,canvas,grid)) 

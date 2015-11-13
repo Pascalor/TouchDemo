@@ -4,7 +4,7 @@ const int CLOCK = PB_2;                        //the Mux clock which is manually
 const int CS_NOT = PE_0;                      //controls whether or not the output gate can be altered
 const int DIN = PF_0;                              //the pin through which the control array is sent
 const int NUM_MUXES = 4;                   //the number of daisy-chained Muxes
-const int DELAY = 300;
+const int DELAY = 500;
 
 
 void setup()
@@ -41,11 +41,11 @@ void loop()
         Serial.print(pin - 2);
         Serial.print("\n");
         
-        delay(50);
+       
         
     }
     
-    delay(DELAY);
+    delay(DELAY  + 10);
     
     
 }
