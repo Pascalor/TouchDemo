@@ -19,13 +19,14 @@ def fill_pixel(canvas, grid, difference, number):
     display = ""
     #try and dynammically change the bound
 
-    bound = 100
+    bound = 75
+    print(difference)
     if difference <= bound:
         display = color[0]
-    if difference >= bound and difference <= bound + 125:
+    if difference >= bound and difference <= bound + 10:
         display = color[3]
         print("Color 3")
-    if difference >= bound + 125 :
+    if difference >= bound + 10 :
         display = color[4]
         print("color 4")
     if difference >= bound+ 125 and difference <= bound + 225:
