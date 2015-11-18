@@ -14,12 +14,16 @@ from Baseline import Baseline
 
 def fill_pixel(canvas, grid, difference, number):
 
+    #the list of colors that can be filled in
     color = ["#F5F5F5","#DCDCDC","#D3D3D3","#C0C0C0","#A9A9A9","#808080","#696969","#000000"]
        
     display = ""
     #try and dynammically change the bound
 
+
+    #change this bound value to match wanted sensitivity 
     bound = 75
+
     print(difference)
     if difference <= bound:
         display = color[0]
@@ -39,19 +43,23 @@ def fill_pixel(canvas, grid, difference, number):
     canvas.update()
         #sleep(1)
 
+
+
+#this method gets the data from the serial port         
+
 def grabdata(pixelnumber, canvas, grid):
     pixellist = []
     baselist = []
     for items in range(pixelnumber):
-         pixellist.append(Baseline(target = items, size = 1))
-         baselist.append(pixellist[items].setbasevalue())
+         pixellist.append(Baseline(target = items, size = 1))   #add it to the size of the pixel list 
+         baselist.append(pixellist[items].setbasevalue())   #set the basevalue for each pixel
 
     print("Baselist ", baselist) # the baseline values 
     while True:
         for count in range(pixelnumber):
-            difference = pixellist[count].value()  - baselist[count]
+            difference = pixellist[count].value()  - baselist[count] #next real value
             #print(difference)
-            fill_pixel(canvas = canvas, grid = grid, difference = difference, number = count)
+            fill_pixel(canvas = canvas, grid = grid, difference = difference, number = count) #pass to this function to fill 
          
 
 
@@ -77,14 +85,16 @@ def main():
 
     #create the grid 
 
+
     
     grid = Touch2D(canvas,canvas_width,canvas_width, pixel_height, pixel_width)
     grid.draw()
 
-    #grid.color(number = 6, color = "black")
+    
 
 
     
+    #launch thread for continuously grabbing the data 
 
     thread = Thread(target = grabdata, args=(pixelnumber,canvas,grid)) 
     thread.daemon = True
@@ -93,7 +103,6 @@ def main():
 
     
 
-    # canvas.update()  
 
 
     	

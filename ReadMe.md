@@ -4,12 +4,12 @@ Flexband Pressure sensor set up:
 30 pixel pressure sensor which is set up through a breadboard.
 
 
-*The breadboard
+The breadboard
 
-* Digital potentiometer is set to 5 megaohms
-* There are 4 multiplexers which operate based off of a truth table i.e. 1 is on 0 is off. There is a datasheet that explains how each pin is being accessed but that is already true in the code itself.
+ Digital potentiometer is set to 5 megaohms
+ There are 4 multiplexers which operate based off of a truth table i.e. 1 is on 0 is off. There is a datasheet that explains how each pin is being accessed but that is already true in the code itself.
 
-*Picture is taken
+Picture is taken
 
 
 

@@ -7,14 +7,14 @@ import statistics
 class Baseline :
 
 	def __init__(self, target, size):
-		self.usbport = "/dev/tty.usbmodem0E20E711"
+		self.usbport = "/dev/tty.usbmodem0E20E711"  #change this if there results usb serial read error
 		self.target = target #number of target pixel 
 		self.basevalue = int() #the list of pixels 
 		self.ser = serial.Serial(self.usbport, 9600)
 		self.size = size #reading size 
 
 	def setbasevalue(self):
-		found = int()
+		found = int() #get the baseline reading
 		reading = []
 		pressure = int(0)
 		#find the pixel
@@ -34,8 +34,8 @@ class Baseline :
 		return base
 
 	def value(self):
-		found = int()
-		pressure = int(0)
+		found = int() #get the desired value pin
+		pressure = int(0) #get reading
 		while True:
     		 value = self.ser.readline().split()
     		 try:

@@ -5,7 +5,7 @@ import math
 class Touch2D:
     #constructor
     def __init__(self, canvas, canvas_width, canvas_height, rowmax, columnmax):
-
+        #Instance variables python object
         self.canvas = canvas
         self.canvas_width = canvas_width
         self.canvas_height = canvas_height
@@ -18,7 +18,7 @@ class Touch2D:
         #this method creates the rectangles 
         side = math.sqrt((self.canvas_width * self.canvas_height)/self.pixel_count) #the side length of each pixel
 
-        xbound = side * self.columnmax
+        xbound = side * self.columnmax #set the boundaries from where the grid will draw from 
         ybound = side * self.rowmax
         origin = 0
         x = origin
@@ -45,7 +45,7 @@ class Touch2D:
             y += side #move to the next row
             
     def color(self, number , color):
-       self.canvas.itemconfig(self.pixels[number], fill = color) 
+       self.canvas.itemconfig(self.pixels[number], fill = color) #colors in the canvas the requested color
 
 
 
